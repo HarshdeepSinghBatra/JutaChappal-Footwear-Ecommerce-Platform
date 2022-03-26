@@ -35,19 +35,19 @@ const Navbar = () => {
     const LINKS = [
         {
             text: 'NEW ARRIVALS',
-            link: '/footwear',
+            link: '/footwear/latest',
         },
         {
             text: 'WOMEN',
-            link: '/footwear',
+            link: '/footwear/women',
         },
         {
             text: 'MEN',
-            link: '/footwear',
+            link: '/footwear/men',
         },
         {
             text: 'BRANDS',
-            link: '/footwear',
+            link: '/footwear/brands',
         },
     ]
 

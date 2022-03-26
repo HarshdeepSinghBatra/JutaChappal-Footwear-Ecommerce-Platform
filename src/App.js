@@ -6,17 +6,19 @@ import ShoeDetails from './pages/ShoeDetails';
 import LoginSignup from './pages/LoginSignup';
 import Footer from './components/Footer';
 import About from './pages/About';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginSignup />} />
-        <Route path='/footwear' element={<Footwear />} />
-        <Route path='/footwear/:id' element={<ShoeDetails />} />
+        <Route path='/footwear/:category' element={<Footwear />} />
+        <Route path='/product/:shoeSlug' element={<ShoeDetails />} />
         <Route path='/about' element={<About />} />
       </Routes>
       <Footer />

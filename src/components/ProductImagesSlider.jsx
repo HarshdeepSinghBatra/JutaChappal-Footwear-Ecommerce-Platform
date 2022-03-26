@@ -18,7 +18,7 @@ const ProductImagesSlider = ({ images }) => {
     return (
         <div className='product-images-slider'>
             <Slider {...settings}>
-                {images.map((item, index) => (
+                {images?.map((item, index) => (
                     <div className='product-slide' key={index}>
                         <img src={item} alt='' />
                     </div>

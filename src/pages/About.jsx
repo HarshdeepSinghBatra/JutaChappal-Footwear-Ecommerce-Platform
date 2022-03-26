@@ -36,7 +36,7 @@ const About = () => {
                 <div className="contact-details">
                     <div>
                         <BsFillTelephoneFill className='contact-icon' />
-                        <span>Phone: +91 1111111111</span>
+                        <span>Phone: +91-1111111111</span>
                     </div>
                     <div>
                         <MdEmail className='contact-icon' />

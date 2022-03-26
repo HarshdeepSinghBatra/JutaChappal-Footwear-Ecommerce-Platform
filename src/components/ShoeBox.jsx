@@ -1,18 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const ShoeBox = ({ role }) => {
+const ShoeBox = ({ role, shoeItem }) => {
+
+    const [shoeName, setShoeName] = useState()
+
+    const setTrimmedName = name => {
+        const trimmed = name.substr(0, 30)
+        const final = trimmed.substr(0, Math.min(trimmed.length, trimmed.lastIndexOf(" ")))
+        setShoeName(final)
+    }
+
+    useEffect(() => {
+        if (shoeItem) setTrimmedName(shoeItem.name)
+    }, [shoeItem])
+
     return (
-        <Link to='/footwear/id'>
+        <Link to={`/product/${shoeItem?.slug}`}>
             <div className={`shoe-box ${role === 'home' && 'shoe-home'}`}>
                 <div className='img-container'>
-                    <img src='https://picsum.photos/300' alt='' />
+                    <img src={shoeItem?.images[0]} alt={shoeItem?.name} />
                 </div>
                 <div className='shoe-text'>
                     <p className='shoe-name'>
-                        FAUSTO Men's White Lace Up Trend
+                        {shoeName && shoeName}
                     </p>
-                    <p className='shoe-cost'>Rs.1,299.00</p>
+                    <p className='shoe-cost'>Rs. {shoeItem?.cost}</p>
                     <button className='btn-submit'>BUY NOW</button>
                 </div>
             </div>

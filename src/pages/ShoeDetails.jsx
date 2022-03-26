@@ -5,6 +5,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import RelatedProducts from '../components/RelatedProducts'
 import ProductImagesSlider from '../components/ProductImagesSlider'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const ShoeDetails = () => {
     const {
@@ -19,7 +21,9 @@ const ShoeDetails = () => {
         },
     })
 
-    const [activeImgURL, setActiveImgURL] = useState("https://images.stockx.com/360/Air-Jordan-4-Retro-Infrared/Images/Air-Jordan-4-Retro-Infrared/Lv2/img01.jpg?auto=format,compress&w=559&q=90&dpr=2&updated_at=1645637225")
+    const [shoeData, setShoeData] = useState() 
+
+    const [activeImgURL, setActiveImgURL] = useState("")
 
     const curr_size = watch('productSize', false)
     const curr_quantity = watch('productQuantity', false)
@@ -27,6 +31,25 @@ const ShoeDetails = () => {
     const scrollPosRef = useRef()
     const sizeRef = useRef()
 
+    const { shoeSlug } = useParams()
+
+    const getDataBySlug = async (slug) => {
+        try {
+            const res = await axios.get(`https://harshdeepshoesapi.herokuapp.com/shoes/${slug}`)
+            const data = res.data
+            setShoeData(data)
+            setActiveImgURL(data.images[0])
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        if (shoeSlug) {
+            getDataBySlug(shoeSlug)
+        }
+    }, [shoeSlug])
+    
     useEffect(() => {
         if(!errors.productSize || !sizeRef) return
         if (window.innerWidth <= 768) {
@@ -54,17 +77,6 @@ const ShoeDetails = () => {
     useEffect(() => {
         if (curr_quantity < 1) setValue('productQuantity', 1)
     }, [curr_quantity, setValue])
-
-    const PRODUCT_SIZES = [40, 41, 42, 43, 44, 45]
-
-    const PRODUCT_IMAGES = [
-        "https://images.stockx.com/360/Air-Jordan-4-Retro-Infrared/Images/Air-Jordan-4-Retro-Infrared/Lv2/img01.jpg?auto=format,compress&w=559&q=90&dpr=2&updated_at=1645637225",
-        "https://images.stockx.com/360/Air-Jordan-4-Retro-Infrared/Images/Air-Jordan-4-Retro-Infrared/Lv2/img07.jpg?auto=format,compress&w=559&q=90&dpr=2&updated_at=1645637225",
-        "https://images.stockx.com/360/Air-Jordan-4-Retro-Infrared/Images/Air-Jordan-4-Retro-Infrared/Lv2/img13.jpg?auto=format,compress&w=559&q=90&dpr=2&updated_at=1645637225",
-        "https://images.stockx.com/360/Air-Jordan-4-Retro-Infrared/Images/Air-Jordan-4-Retro-Infrared/Lv2/img19.jpg?auto=format,compress&w=559&q=90&dpr=2&updated_at=1645637225",
-        "https://images.stockx.com/360/Air-Jordan-4-Retro-Infrared/Images/Air-Jordan-4-Retro-Infrared/Lv2/img25.jpg?auto=format,compress&w=559&q=90&dpr=2&updated_at=1645637225",
-        "https://images.stockx.com/360/Air-Jordan-4-Retro-Infrared/Images/Air-Jordan-4-Retro-Infrared/Lv2/img31.jpg?auto=format,compress&w=559&q=90&dpr=2&updated_at=1645637225"
-    ]
 
     const handleImageActive = e => {
         document.querySelector(".img-container.active-thumbnail").classList.remove("active-thumbnail")
@@ -101,7 +113,7 @@ const ShoeDetails = () => {
             <section className='product-overview'>                
                 <div className='product-images'>
                     <div className="thumbnails">
-                        {PRODUCT_IMAGES.map((item, index) => (
+                        {shoeData?.images.map((item, index) => (
                             <div className={`img-container ${index === 0 && "active-thumbnail"}`} key={index} onClick={e => handleImageActive(e)}>
                                 <img src={item} alt="thumbnail-product" />
                             </div>
@@ -113,7 +125,7 @@ const ShoeDetails = () => {
                         </div>
                     </div>
                 </div>
-                <ProductImagesSlider images={PRODUCT_IMAGES} />
+                <ProductImagesSlider images={shoeData?.images} />
                 <form
                     className='product-text'
                     onSubmit={handleSubmit(onSubmit)}
@@ -131,15 +143,14 @@ const ShoeDetails = () => {
                     pauseOnHover={false}
                 />
                     <h1 className='product-title'>
-                        FAUSTO Men's Olive Green Lace Up Trendy Stylish Outdoor
-                        Fashion Sneakers
+                        {shoeData?.name}
                     </h1>
                     <p className='product-cost'>
-                        Rs. 1299.00 <span>(Inclusive of all taxes)</span>
+                        Rs. {shoeData?.cost} <span>(Inclusive of all taxes)</span>
                     </p>
                     <p className='product-status'>
                         AVAILABILITY:{' '}
-                        <span className='available'>IN STOCK</span>
+                        <span className='available'> {shoeData?.status ? (<span className='available'>IN STOCK</span>) : ((<span className='not-available'>OUT OF STOCK</span>))}</span>
                     </p>
                     <div className='product-size'>
                         <p>
@@ -147,7 +158,7 @@ const ShoeDetails = () => {
                         </p>
                         <fieldset>
                             <ul ref={sizeRef}>
-                                {PRODUCT_SIZES.map((item, index) => (
+                                {shoeData?.size.map((item, index) => (
                                     <li key={index}>
                                         <label
                                             htmlFor={`size${index}`}
@@ -204,12 +215,12 @@ const ShoeDetails = () => {
             <section className='product-details'>
                 <span>DETAILS</span>
                 <p>
-                    Sneakers only pair of shoes people wanted to wear because of how comfortable and trendy they were. These FAUSTO sneakers can be worn with anything - dresses, overalls, shorts - which is what truly makes them perfect look every time.
+                    {shoeData?.details}
                 </p>
             </section>
             <section className='related-products'>
                 <h2>RELATED PRODUCTS</h2>
-                <RelatedProducts />
+                <RelatedProducts shoeItem={shoeData} />
             </section>
         </main>
     )
