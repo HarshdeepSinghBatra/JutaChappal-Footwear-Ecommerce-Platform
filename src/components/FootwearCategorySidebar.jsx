@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const FootwearCategorySidebar = ({ isMobileFilterOpen, setIsMobileFilterOpen, setShoesData }) => {
     const [initialFlag, setInitialFlag] = useState(0)
-    const [footwearCategoryOpen, setFootwearCategoryOpen] = useState([false, false, false])
+    const [footwearCategoryOpen, setFootwearCategoryOpen] = useState([false, false, false, false])
 
     const [activeFilter, setActiveFilter] = useState([])
     const { register, handleSubmit, reset } = useForm()
