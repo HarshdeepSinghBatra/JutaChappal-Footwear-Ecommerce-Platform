@@ -12,14 +12,16 @@ const ShoeCarousel = ({ heading, shoesData }) => {
 
     useEffect(() => {
         if (shoesData) {
-            const list = shoesData.sort((d1, d2) => d2.sales - d1.sales).slice(0,10)
+            let list
+            if (heading === 'TOP SELLING') {
+                list = shoesData.sort((d1, d2) => d2.sales - d1.sales).slice(0,10)
+            } else {
+                list = shoesData.sort((d1, d2) => d2.date - d1.date).slice(0,10)
+            }
+
             setShoeList(list)
         }
     }, [shoesData])
-
-    useEffect(() => {
-        if (shoeList) console.log(shoeList)
-    }, [shoeList])
 
     const settings = {
         slidesToShow: 5,

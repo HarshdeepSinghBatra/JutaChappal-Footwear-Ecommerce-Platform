@@ -13,10 +13,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    mobile: {
-        type: Number,
-        required: true,
-    },
 })
 
 module.exports = mongoose.model("users", userSchema)

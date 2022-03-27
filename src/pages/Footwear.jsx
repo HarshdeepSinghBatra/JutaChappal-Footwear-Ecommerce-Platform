@@ -26,15 +26,15 @@ const Footwear = () => {
       try {
         let res
         if (["Bata", "Lancer", "Sparx", "Fausto"].includes(category)) {
-          res = await axios.get(`https://harshdeepshoesapi.herokuapp.com/shoes/brand/${category}`)
+          res = await axios.get(`/api/shoes/brand/${category}`)
         } else {
-          res = await axios.get(`https://harshdeepshoesapi.herokuapp.com/shoes/category/${category}`)
+          res = await axios.get(`/api/shoes/category/${category}`)
         }
 
         const data = res.data
         setShoesData(data);
       } catch (err) {
-        console.log(err)
+        console.error(err)
       }
     }
 

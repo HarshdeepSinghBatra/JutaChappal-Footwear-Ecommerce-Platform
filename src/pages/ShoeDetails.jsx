@@ -9,6 +9,9 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const ShoeDetails = () => {
+
+    const [shoeData, setShoeData] = useState() 
+
     const {
         register,
         handleSubmit,
@@ -20,8 +23,6 @@ const ShoeDetails = () => {
             productQuantity: 1,
         },
     })
-
-    const [shoeData, setShoeData] = useState() 
 
     const [activeImgURL, setActiveImgURL] = useState("")
 
@@ -35,12 +36,12 @@ const ShoeDetails = () => {
 
     const getDataBySlug = async (slug) => {
         try {
-            const res = await axios.get(`https://harshdeepshoesapi.herokuapp.com/shoes/${slug}`)
+            const res = await axios.get(`/api/shoes/${slug}`)
             const data = res.data
             setShoeData(data)
             setActiveImgURL(data.images[0])
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
 
@@ -49,6 +50,10 @@ const ShoeDetails = () => {
             getDataBySlug(shoeSlug)
         }
     }, [shoeSlug])
+
+    useEffect(() => {
+        if (shoeData) setValue('status', shoeData.status)
+    }, [shoeData])
     
     useEffect(() => {
         if(!errors.productSize || !sizeRef) return
@@ -91,8 +96,31 @@ const ShoeDetails = () => {
         e.target.classList.add('active-size')        
     }
 
-    const notifyToast = () => {
+    const notifyToastSuccess = () => {
         toast.success('Item added to cart', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+        })
+    }
+    const notifyToastFailure = () => {
+        toast.error('Item out of stock', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+        })
+    }
+
+    const notifyToastNotLoggedIn = () => {
+        toast.error('Login first to add item to cart', {
             position: 'top-right',
             autoClose: 3000,
             hideProgressBar: true,
@@ -104,8 +132,9 @@ const ShoeDetails = () => {
     }
 
     const onSubmit = data => {
-        console.log(data)
-        notifyToast()
+        if (!localStorage.getItem('userName')) notifyToastNotLoggedIn()
+        else if (!data.status) notifyToastFailure()
+        else notifyToastSuccess()
     }
 
     return (
@@ -151,6 +180,7 @@ const ShoeDetails = () => {
                     <p className='product-status'>
                         AVAILABILITY:{' '}
                         <span className='available'> {shoeData?.status ? (<span className='available'>IN STOCK</span>) : ((<span className='not-available'>OUT OF STOCK</span>))}</span>
+                        <input type="hidden" {...register("status")} />
                     </p>
                     <div className='product-size'>
                         <p>

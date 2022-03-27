@@ -13,7 +13,7 @@ const Footer = () => {
 
     const FOOTER_LINKS = [
         {
-            heading: 'FASHOS',
+            heading: 'JUTACHAPPAL',
             list: [
                 'About Us',
                 'Careers',
@@ -186,7 +186,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className='footer-trademark'>
-                &copy; {new Date().getFullYear()} fashos.com all rights
+                &copy; {new Date().getFullYear()} jutachappal.com all rights
                 reserved.
             </div>
         </footer>

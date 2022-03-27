@@ -52,7 +52,7 @@ const Home = () => {
             text: 'SPORTS',
         },
         {
-            link: '/footwear/sandal',
+            link: '/footwear/sandals',
             img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/categories%2Fsandals.jpg?alt=media&token=11fbfb31-33c6-4091-ad76-477f7fd02c2a',
             text: 'SANDALS',
         },
@@ -88,12 +88,11 @@ const Home = () => {
 
     const getAllData = async () => {
         try {  
-            const res = await axios.get("https://harshdeepshoesapi.herokuapp.com/shoes");
+            const res = await axios.get("/api/shoes");
             const data = res.data
-            // console.log(data)
             setShoesData(data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
 

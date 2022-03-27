@@ -64,6 +64,29 @@ nav {
     transition: all ease-in 150ms;
 }
 
+.logged-user {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.logged-user button {
+    background: none;
+    padding: 0.3rem 1rem;
+    background: var(--color-dark) !important;
+    border: 1px solid transparent !important;
+    color: var(--color-light);
+    border-radius: 3px;
+    transition: all ease-in 150ms;
+}
+
+.logged-user button:hover {
+    color: var(--color-dark);
+    border: 1px solid var(--color-dark) !important;
+    background: var(--color-light) !important;
+
+}
+
 .mobile-only {
     display: none;
 }

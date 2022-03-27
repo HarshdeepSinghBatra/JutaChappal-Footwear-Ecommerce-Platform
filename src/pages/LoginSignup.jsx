@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
 import { MdError } from 'react-icons/md'
 import { BsCheckCircleFill } from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom'
 
 const LoginSignup = () => {
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (localStorage.getItem("userName")) {
+            navigate("/")
+        }
+    }, [])
 
     const [authError, setAuthError] = useState(null)
     const [authSuccess, setAuthSuccess] = useState(null)

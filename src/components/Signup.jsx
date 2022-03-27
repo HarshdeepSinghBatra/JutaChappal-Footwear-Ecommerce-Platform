@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -11,14 +12,31 @@ const Signup = ({ setAuthError, setAuthSuccess }) => {
 
     const password_val = watch("password", false)
 
-    const onSubmit = data => {        
-        console.log(data)
-        setAuthSuccess("Successfully registered")
-        setAuthError(null)
+    const registerUser = async (userData) => {
+        try {
+            const res = await axios.post("/api/signup", {
+                name: userData.fname + " " + userData.lname,
+                email: userData.email,
+                password: userData.password
+            })
+
+            const data = res.data
+            console.log(data)
+            if (data.status) {
+                setAuthError(null)
+                setAuthSuccess(data.message)
+            } else {
+                setAuthSuccess(null)
+                setAuthError(data.message)
+            }
+        } catch (err) {
+            console.error(err.message)
+        }
     }
+
     return (
         <section className='container'>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(registerUser)}>
                 <h1>REGISTER</h1>
                 <fieldset>
                     <input

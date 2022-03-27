@@ -1,19 +1,45 @@
-require("dotenv").config();
+require('dotenv').config()
 
-const express = require('express');
+const express = require('express')
 const app = express()
-const db = require("./config/db")
-const { addUser } = require("./controllers/UserController")
-const { checkUserExists } = require("./middleware/UserMiddleware")
+const db = require('./config/db')
+const port = process.env.PORT || 9000
+const { addUser, loginUser } = require('./controllers/UserController')
 
-app.use(express.json());
+const {
+    checkUserExists,
+    checkPassword,
+} = require('./middleware/UserMiddleware')
+const {
+    getShoes,
+    getShoesByBrand,
+    getShoesByCategory,
+    getShoesByFilter,
+    getShoesBySlug,
+} = require('./controllers/Product')
 
-const cors = require("cors");
-app.use(cors());
+app.use(express.json())
 
-// addUser()
-checkUserExists()
+const cors = require('cors')
+app.use(cors())
 
-app.listen(9000, () => {
-    console.log("Server is running at port 9000")
+app.post('/api/signup', checkUserExists, addUser)
+
+app.post('/api/login', checkUserExists, checkPassword, loginUser)
+
+// SHOES DATA
+
+
+app.get('/api/shoes', getShoes)
+
+app.get('/api/shoes/category/:category', getShoesByCategory)
+
+app.get('/api/shoes/filter', getShoesByFilter)
+
+app.get('/api/shoes/:slug', getShoesBySlug)
+
+app.get('/api/shoes/brand/:brandname', getShoesByBrand)
+
+app.listen(port, () => {
+    console.log(`Server is running at port ${port}`)
 })

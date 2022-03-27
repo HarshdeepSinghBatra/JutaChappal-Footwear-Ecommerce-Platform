@@ -1,22 +1,44 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
 
 const Login = ({ setAuthError, setAuthSuccess }) => {
+
+    const [ searchParams ] = useSearchParams()
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm()
-    const onSubmit = data => {
-        console.log(data)
-        setAuthSuccess("Successfuly logged in")
-        setAuthError(null)
+
+    const loginUser = async (userData) => {
+        try {
+            const res = await axios.post("/api/login", {
+                email: userData.email,
+                password: userData.password
+            })
+
+            let data = res.data
+            console.log(data)
+            if (data.status) {
+                setAuthError(null)
+                setAuthSuccess(data.message)
+                localStorage.setItem("userName", data.userData.name)
+                window.location.href=searchParams.get('continue')
+            } else {
+                setAuthSuccess(null)
+                setAuthError(data.message)
+            }
+        } catch (err) {
+            console.log(err.message)
+        }
     }
 
     return (
         <section className='login'>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(loginUser)}>
                 <h1>LOGIN</h1>
                 <fieldset>
                     <input
@@ -49,7 +71,7 @@ const Login = ({ setAuthError, setAuthSuccess }) => {
                 </fieldset>
                 <Link to='/'>Forgot your password?</Link>
                 <button className='btn-submit' type='submit'>
-                    SIGN IN
+                    LOGIN
                 </button>
             </form>
         </section>

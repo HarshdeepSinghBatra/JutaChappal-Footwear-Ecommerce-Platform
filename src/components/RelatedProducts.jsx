@@ -8,15 +8,15 @@ const RelatedProducts = ({ shoeItem }) => {
 
     const getRelatedData = async (shoeItem) => {
         try {
-            const res = await axios.get(`https://harshdeepshoesapi.herokuapp.com/shoes/category/${shoeItem.category}`)
+            const res = await axios.get(`/api/shoes/category/${shoeItem.category}`)
             const data = res.data
-            const res2 = await axios.get(`https://harshdeepshoesapi.herokuapp.com/shoes/brand/${shoeItem.brand}`)
+            const res2 = await axios.get(`/api/shoes/brand/${shoeItem.brand}`)
             const data2 = res2.data
             const combinedData = [...new Map([...data, ...data2].map(item => [item.slug, item])).values()]
 
             setRelatedProductsData(combinedData.filter(shoe => shoe.slug !== shoeItem.slug).sort((shoe1, shoe2) => shoe2.sales - shoe1.sales).slice(0, 6))
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
 
