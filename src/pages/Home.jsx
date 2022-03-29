@@ -11,54 +11,54 @@ const Home = () => {
     const CATEGORY1 = [
         {
             link: '/footwear/women',
-            img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/category1%2Fwomen_thumb.webp?alt=media&token=9125ff6f-0fb2-4d06-aa4f-3d29b43d3c3e',
+            img: 'women_thumb.webp',
             text: 'WOMEN',
         },
         {
             link: '/footwear/men',
-            img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/category1%2Fmen_thumb.jpg?alt=media&token=7cc74d85-c490-4578-a17d-5ffcbfc45005',
+            img: 'men_thumb.jpg',
             text: 'MEN',
         },
         {
             link: '/footwear/latest',
-            img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/category1%2Fnewarrival_thumb.jpg?alt=media&token=4fcce098-29ee-4290-b376-ab7153c0f885',
+            img: 'newarrival_thumb.jpg',
             text: 'NEW ARRIVALS',
         },
         {
             link: '/footwear/best',
-            img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/category1%2Fbest_seller_thumb.jpg?alt=media&token=c898503b-8284-40c8-b318-f0f796ecd7bd',
+            img: 'best_seller_thumb.jpg',
             text: 'BEST SELLERS',
         },
     ]
     const CATEGORY2 = [
         {
             link: '/footwear/casual',
-            img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/categories%2Fcasual.jpg?alt=media&token=fcb29cbe-04e4-4492-81df-66ae9226e8a0',
+            img: 'casual.jpg',
             text: 'CASUAL',
         },
         {
             link: '/footwear/formal',
-            img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/categories%2Fformal.jpg?alt=media&token=da889cb8-5f8a-487f-a128-e351e04693ce',
+            img: 'formal.jpg',
             text: 'FORMAL',
         },
         {
             link: '/footwear/slippers',
-            img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/categories%2Fslipper.jpg?alt=media&token=c33e81d0-4b5e-4b6d-b73b-143c8e68aadf',
+            img: 'slippers.jpg',
             text: 'SLIPPERS',
         },
         {
             link: '/footwear/sports',
-            img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/categories%2Fsports.jpg?alt=media&token=a19921f3-11a5-4760-be89-aceffddb4a67',
+            img: 'sports.jpg',
             text: 'SPORTS',
         },
         {
             link: '/footwear/sandals',
-            img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/categories%2Fsandals.jpg?alt=media&token=11fbfb31-33c6-4091-ad76-477f7fd02c2a',
+            img: 'sandals.jpg',
             text: 'SANDALS',
         },
         {
             link: '/footwear/boots',
-            img: 'https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/categories%2Fboots.jpg?alt=media&token=982317da-38bc-4708-a17a-6b25bdc6548f',
+            img: 'boots.jpg',
             text: 'BOOTS',
         },
     ]
@@ -66,22 +66,22 @@ const Home = () => {
     const BRANDS = [
         {
             name: "Lancer",
-            img: "https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/lancer.webp?alt=media&token=99bf212f-65b9-47bc-9ccf-ff35b8c524d8",
+            img: "lancer.webp",
             link: "footwear/lancer"
         },
         {
             name: "Bata",
-            img: "https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/bata.jpg?alt=media&token=76327033-1bee-4df6-abd4-bcabc273ced5",
+            img: "bata.jpg",
             link: "footwear/bata"
         },
         {
             name: "Sparx",
-            img: "https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/sparx.jpg?alt=media&token=e22c1bd2-86ad-4516-8c94-f993d3d222f0",
+            img: "sparx.jpg",
             link: "footwear/sparx"
         },
         {
             name: "Fausto",
-            img: "https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/fausto.jpg?alt=media&token=a28b68c0-5b18-49d4-baf3-73f545835835",
+            img: "fausto.jpg",
             link: "footwear/fausto"
         },
     ]
@@ -115,7 +115,7 @@ const Home = () => {
                                 key={index}
                             >
                                 <div className='img-container'>
-                                    <img src={item.img} alt={item.text} />
+                                    <img src={`/images/category1/${item.img}`} alt={item.text} />
                                 </div>
                                 <span>{item.text}</span>
                             </Link>
@@ -129,7 +129,7 @@ const Home = () => {
                                 key={index}
                             >
                                 <div className='img-container'>
-                                    <img src={item.img} alt={item.text} />
+                                    <img src={`/images/category2/${item.img}`} alt={item.text} />
                                 </div>
                                 <span>{item.text}</span>
                             </Link>
@@ -146,7 +146,7 @@ const Home = () => {
                             <Link to={item.link} className='brand-item' key={index}>
                                 <div className='img-container'>
                                     <img
-                                        src={item.img}
+                                        src={`/images/brands/${item.img}`}
                                         alt={item.name}
                                     />
                                 </div>

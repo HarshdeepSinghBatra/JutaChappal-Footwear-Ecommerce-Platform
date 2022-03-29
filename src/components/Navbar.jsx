@@ -4,7 +4,6 @@ import { FaRegUser } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { BsCartCheck } from 'react-icons/bs'
-import img from "../logo.png"
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
@@ -61,9 +60,8 @@ const Navbar = () => {
             <nav className={`navbar ${isScrolled && 'scrolled'}`} ref={navRef}>
                 <div className='upperbar'>
                     <Link to='/' className='logo'>
-                        <img
-                            // src='https://www.fashos.com/pub/media/logo/stores/1/logo.png'
-                            src={img}
+                        <img                        
+                            src="/images/logo.png"
                             alt=''
                         />
                     </Link>
@@ -91,8 +89,7 @@ const Navbar = () => {
                     />
                     <Link to='/' className='logo-left'>
                         <img
-                            // src='https://www.fashos.com/pub/media/logo/stores/1/logo.png'
-                                src={img}
+                                src="/images/logo.png"
 
                                 alt=''
                         />
