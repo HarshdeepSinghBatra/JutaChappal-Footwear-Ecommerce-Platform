@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const User = require('../models/User')
+const User = require('../models/User.db')
 const bcrypt = require("bcrypt")
 
 const addUser = async (req, res) => {

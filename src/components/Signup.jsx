@@ -1,8 +1,12 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 
 const Signup = ({ setAuthError, setAuthSuccess }) => {
+
+    const [isShowPassword, setisShowPassword] = useState(false)
+
     const {
         register,
         handleSubmit,
@@ -11,6 +15,15 @@ const Signup = ({ setAuthError, setAuthSuccess }) => {
     } = useForm()
 
     const password_val = watch("password", false)
+
+    const passwordRef = useRef()
+
+    const { ref, ...restRegisterPassword } = register('password', { required: true, minLength: 6 })
+
+    useEffect(() => {
+        if (isShowPassword) passwordRef?.current.setAttribute('type', 'text')
+        else passwordRef?.current.setAttribute('type', 'password')
+    }, [isShowPassword])
 
     const registerUser = async (userData) => {
         try {
@@ -29,6 +42,7 @@ const Signup = ({ setAuthError, setAuthSuccess }) => {
                 setAuthSuccess(null)
                 setAuthError(data.message)
             }
+            window.scrollTo(0, 0)
         } catch (err) {
             console.error(err.message)
         }
@@ -79,11 +93,18 @@ const Signup = ({ setAuthError, setAuthSuccess }) => {
                         ) : null)}
                 </fieldset>
                 <fieldset>
+                    <div className="password-container">
                     <input
                         type='password'
+                        ref={e => {
+                            ref(e)
+                            passwordRef.current = e
+                        }}
                         placeholder='Password'
-                        {...register('password', { required: true, minLength: 6 })}
+                        {...restRegisterPassword}
                     />
+                    {isShowPassword ? <BsEyeSlashFill className='password-icon' onClick={() => setisShowPassword(!isShowPassword)} /> : <BsEyeFill className='password-icon' onClick={() => setisShowPassword(!isShowPassword)} />}
+                    </div>
                     {errors.password &&
                         (errors.password.type === 'required' ? (
                             <p className='form-error'>Password is required</p>

@@ -54,16 +54,6 @@ code {
 
 /* NAVBAR */
 
-nav {
-    position: sticky;
-    top: 0;
-    z-index: 500;
-    background-color: var(--color-light);
-    border-bottom: 1px solid var(--color-gray);
-    padding: 1rem 3rem;
-    transition: all ease-in 150ms;
-}
-
 .logged-user {
     display: flex;
     gap: 1.5rem;
@@ -78,102 +68,185 @@ nav {
     color: var(--color-light);
     border-radius: 3px;
     transition: all ease-in 150ms;
+    white-space: nowrap;
 }
 
 .logged-user button:hover {
     color: var(--color-dark);
     border: 1px solid var(--color-dark) !important;
     background: var(--color-light) !important;
-
 }
 
-.mobile-only {
-    display: none;
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    background-color: var(--color-light);
+    border-bottom: 1px solid var(--color-gray);
+    padding: 1rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 9fr 1fr;
+    grid-template-areas: 
+    ". navLogo navBtns"
+    ". navList .";
 }
 
 nav.scrolled {
-    transform: translateY(-50%);
+    padding: 0.5rem;
+    padding-right: 2rem;
+    grid-template-areas: 
+    "navLogo navList navBtns";
 }
 
-nav.scrolled .logo {
-    transform: translateY(-50%);
-}
-
-.upperbar {
+.nav-logo {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 60px;
-    position: relative;
+    gap: 0.5rem;
+    grid-area: navLogo;
+    justify-self: center;
 }
 
-.upperbar .buttons {
-    position: absolute;
+.logo {
+    width: 170px;
+    display: block;
 }
 
-.buttons {
+.nav-list {
+    justify-self: center;
+    list-style: none;
     display: flex;
-    gap: 2rem;
-    right: 0;
+    align-items: center;
+    gap: 1rem;
+    grid-area: navList;
 }
 
-.buttons button {
+.nav-list li a:hover {
+    color: var(--color-primary);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-end;
+    align-items: center;
+    grid-area: navBtns;
+}
+
+.nav-buttons button {
     border: none;
     cursor: pointer;
     background: none;
+    height: fit-content;
 }
 
 .nav-icon {
     font-size: 1.1rem;
 }
 
-.buttons a:hover .nav-icon, .buttons button:hover .nav-icon {
+.nav-buttons a:hover .nav-icon, .nav-buttons button .nav-icon:hover {
     fill: var(--color-primary) !important;
 }
 
-.logo {
-    width: 170px;
-    transition: all ease-in 150ms;
-    display: block;
-}
-
-.lowerbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.cart-ref-container {
     position: relative;
 }
 
-.logo-left {
-    width: 120px;
-    display: none;
+.cart-badge {
     position: absolute;
-    left: 0;
+    background-color: var(--color-dark);
+    right: -0.5rem;
+    bottom: -0.3rem;
+    color: var(--color-light);
+    font-size: 0.6rem;
+    width: 1rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.lowerbar .buttons {
+.cart-container {
     position: absolute;
-    right: 0;
-    display: none;
+    right: -1rem;
+    top: 150%;
+    background-color: var(--color-light);
+    border: 1px solid #ccc;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    min-height: 12rem;
+    max-height: 60vh;
+    width: 25rem;
+    max-width: 80vw;
+    padding: 1rem;
+    transition: all ease-in 50ms;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.85rem; 
+    overflow-y: auto;
 }
 
-nav.scrolled .lowerbar .buttons, nav.scrolled .logo-left {
-    display: flex;
+.cart-container span {
+    font-weight: bold;
 }
 
-.lowerbar ul {
+.cart-header {
     display: flex;
-    list-style: none;
     justify-content: space-between;
 }
 
-.lowerbar ul li a {
-    text-decoration: none;
-    padding: 15px;
+.cart-empty {
+    margin: auto;
 }
 
-.lowerbar ul li a:hover {
-    color: var(--color-primary)
+.cart-item {
+    display: grid;
+    grid-template-columns: 3fr 8fr 1fr;
+    gap: 0.5rem;
+    border-top: 1px solid #ccc;
+    padding-top: 0.5rem;
+}
+
+.cart-image {
+    align-self: center;
+}
+
+.cart-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-align: left;
+}
+
+.cart-delete {
+    display: block;
+    background: none;
+    border: none;
+    height: fit-content;
+}
+
+.cart-icon {
+    font-size: 1rem;
+    fill: #777;
+    cursor: pointer;
+    margin-left: auto;
+    margin-top: 0.2rem;
+    display: block;
+}
+
+.cart-icon:hover {
+    fill: var(--color-dark);
+}
+
+.cart-modal-button {
+    width: 100% !important;
+    color: var(--color-light) !important;
+    text-align: center;
+}
+
+.cart-modal-button:hover {
+    color: var(--color-dark) !important;
 }
 
 /* HOME PAGE */
@@ -591,6 +664,24 @@ input {
     background: hsl(0, 0%, 95%);
     border-radius: 3px;
     border:  none;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    fill: #aaa;
+    cursor: pointer;
+}
+
+.password-icon:hover {
+    fill: #666;
 }
 
 .btn-submit {
@@ -1019,7 +1110,11 @@ footer a:hover {
     list-style: none;
 }
 
+/* GLOBALS */
 
+.mobile-only {
+    display: none;
+}
 
 /* MEDIA QUERIES */
 
@@ -1078,38 +1173,21 @@ footer a:hover {
         padding: 1rem;
     }
 
+    .nav-logo {
+        gap: 0.2rem;
+    }
+
+    .nav-list {
+        display: none;
+    }
+
     .mobile-only {
         display: block;
-    }
-
-    .upperbar {
-        display: none;
-    }
-
-    nav.scrolled {
-        transform: translateY(0);
-    }
-
-    .lowerbar {
-        justify-content: unset;
-    }
-
-    .lowerbar ul {
-        display: none;
     }
 
     .mobile-nav-open {
         font-size: 1.5rem;
         margin-right: 1rem;
-    }
-
-    .logo-left, .lowerbar .buttons {
-        position: relative;
-    }
-
-    .buttons {
-        margin-left: auto;
-        gap: 1rem;
     }
 
     .mobile-side-menu {
@@ -1156,7 +1234,7 @@ footer a:hover {
         bottom: 0;
         transition: all linear 100ms;
     }
-    
+
     /* HOME PAGE */
 
     main {

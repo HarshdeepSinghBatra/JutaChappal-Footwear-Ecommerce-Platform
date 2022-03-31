@@ -1,6 +1,24 @@
-// const shoesData = require("../data.json")
-
 const productModel = require('../models/Product.db')
+
+// Not for production use ----------------------
+
+// const shoedata = require("../data.json")
+shoedata = []
+
+const insertProducts = async () => {
+    try {
+        const data = await productModel.insertMany(shoedata)
+        if (data) { 
+            console.log("inserted")
+        } else {
+            console.log("not inserted")
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+// ----------------------------------------------
 
 const getShoes = async (req, res) => {
     try {

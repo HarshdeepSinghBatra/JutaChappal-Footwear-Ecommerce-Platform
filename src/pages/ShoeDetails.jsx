@@ -8,7 +8,7 @@ import ProductImagesSlider from '../components/ProductImagesSlider'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-const ShoeDetails = () => {
+const ShoeDetails = ({ setCartItems }) => {
 
     const [shoeData, setShoeData] = useState() 
 
@@ -131,10 +131,34 @@ const ShoeDetails = () => {
         })
     }
 
+    const addCartItem = async (data) => {
+        try {
+            const res = await axios.post('/api/cart/insertItem', {
+                itemId: Date.now(),
+                itemName: shoeData.name,
+                itemCost: shoeData.cost * data.productQuantity,
+                itemSize: data.productSize,
+                itemQuantity: data.productQuantity,
+                imageURL: shoeData.images[0],
+                userEmail: localStorage.getItem("userName")
+            })
+
+            setCartItems({id: Date.now(), cost: shoeData.cost * data.productQuantity, imageURL: shoeData.images[0], name: shoeData.name, quantity: data.productQuantity, size: data.productSize, userEmail: localStorage.getItem("userName")})
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     const onSubmit = data => {
         if (!localStorage.getItem('userName')) notifyToastNotLoggedIn()
         else if (!data.status) notifyToastFailure()
-        else notifyToastSuccess()
+        else {
+            // addCartItem(data)
+            console.log(data)
+            addCartItem(data)
+            notifyToastSuccess()
+        }
     }
 
     return (
