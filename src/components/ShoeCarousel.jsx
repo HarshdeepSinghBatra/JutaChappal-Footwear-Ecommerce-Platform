@@ -21,7 +21,7 @@ const ShoeCarousel = ({ heading, shoesData }) => {
 
             setShoeList(list)
         }
-    }, [shoesData])
+    }, [shoesData, heading])
 
     const settings = {
         slidesToShow: 5,
@@ -53,6 +53,7 @@ const ShoeCarousel = ({ heading, shoesData }) => {
                 {shoeList?.map((shoeItem, index) => (
                     <ShoeBox key={index} role='home' shoeItem={shoeItem} />
                 ))}
+                {shoeList ? null : <p className='temp-slider-adjust'></p>}
             </Slider>
         </section>
     )

@@ -18,10 +18,14 @@ const Cart = ({ isScrolled, cartItems, setCartItems }) => {
         setCartItems(cartItem)
     }
 
+    const getTotalItemsCount = cartItems => (
+        cartItems?.reduce((total, item) => total + item.quantity, 0)
+    )
+
   return (
     <div className={`cart-container ${isScrolled && 'scrolled'}`}>
         <div className="cart-header">
-            <p className="cart-header-quantity"> <span>{cartItems?.reduce((total, item) => total + item.quantity, 0)}</span> {cartItems?.length > 1 ? "items" : "item"} in Cart </p>
+            <p className="cart-header-quantity"> <span>{getTotalItemsCount(cartItems)}</span> {getTotalItemsCount(cartItems) > 1 ? "items" : "item"} in Cart </p>
             <p className="cart-header-price">Cart Subtotal: <span>Rs. {cartItems?.reduce((total, item) => total + item.cost, 0)}</span></p>
         </div>
 

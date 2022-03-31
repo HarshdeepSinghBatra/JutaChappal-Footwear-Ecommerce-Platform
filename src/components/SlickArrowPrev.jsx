@@ -1,7 +1,6 @@
 import React from 'react'
 
 const SlickArrowPrev = ({ className, style, onClick }) => {
-    // const { className, style, onClick } = props;
 
     return (
         <button
