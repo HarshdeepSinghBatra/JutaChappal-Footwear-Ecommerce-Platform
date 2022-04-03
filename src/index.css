@@ -396,7 +396,9 @@ section h2 {
 
 .shoe-box {
     border: 1px solid transparent;
+    justify-content: space-between;
     padding: 0.6rem;
+    height: 100%;
 }
 
 .shoe-box:hover {

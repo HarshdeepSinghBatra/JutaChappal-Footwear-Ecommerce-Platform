@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# JUTACHAPPAL
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A footwear ecommerce platform designed for you to get access to the latest fasionista. A one of its kind online personalized store to recommend the most stylish footwear as per your needs. We bring you a huge collection, created around many themes and styles to bring you cult classic fashion.
 
-## Available Scripts
+### Demo
 
-In the project directory, you can run:
+Live hosted Link: [Site link](https://jutachappal.netlify.app)
 
-### `npm start`
+### App Screenshots
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Home page banner](https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/readme_screenshots%2FScreenshot%20(291).png?alt=media&token=78ce9531-90a3-45a7-bdd0-6121592b2a1b)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Home page categories](https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/readme_screenshots%2FScreenshot%20(292).png?alt=media&token=7d1b3aac-21a2-4708-b171-030d5e2d6578)
 
-### `npm test`
+![Home page sliders](https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/readme_screenshots%2FScreenshot%20(293).png?alt=media&token=7008baed-003a-4ef8-83f0-f4fdedfefabd)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Home page brands and footer](https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/readme_screenshots%2FScreenshot%20(294).png?alt=media&token=52f894d6-89ca-442e-acd7-35c774e07709)
 
-### `npm run build`
+![Footwear page](https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/readme_screenshots%2FScreenshot%20(295).png?alt=media&token=7e7e23a8-366c-4973-9d5e-bc32353a8a11)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Footwear details page](https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/readme_screenshots%2FScreenshot%20(296).png?alt=media&token=8ca388bb-227c-4f69-8d57-77bcbb0c26a8)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Footwear details page related products](https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/readme_screenshots%2FScreenshot%20(297).png?alt=media&token=b92ec503-6053-448a-acce-e963ab3d60ed)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Login pge](https://firebasestorage.googleapis.com/v0/b/webdevprojectsem1.appspot.com/o/readme_screenshots%2FScreenshot%20(298).png?alt=media&token=5b68f285-b878-492b-922a-52a13d069da2)
 
-### `npm run eject`
+### Dev Tools / Technologies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Client side code written in **React**
+2. Server side code written in **NodeJS** and **Express**.
+3. **MongoDB Atlas** is used for maintaining database.
+4. Api request handled using **Axios**.
+5. Form fields managed using **React-Hook-Form**.
+6. **React-slick** and **React-responsive-carousel** used for image sliders.
+7. **React-toastify** used for sounding alerts and error management.
+8. SVG icons referred from **React-icons**.
+9. Server-side deployed on **Heroku**.
+10. Front-end deployed on **Netlify**.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Environment Variables
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To run this project, you will need to add the following environment variables to your .env file in the server directory
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`DB_USERNAME`
+`DB_PASSWORD`
+`DB_DATABASE`
 
-## Learn More
+### Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Follow the steps to setup a developement environment for this app:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Clone this repo. Use the command, or simply download the zip file for code
+```bash
+  git clone https://github.com/HarshdeepSinghBatra/JutaChappal-Footwear-Ecommerce-Platform.git
+```
 
-### Code Splitting
+- Set up client dependencies
+```bash
+  yarn install or npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Set up server dependencies
+```bash
+  cd ./server
+  yarn install or npm install
+```
 
-### Analyzing the Bundle Size
+- Create .env file and add in all the environment variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Start the dev servers
+```bash
+  yarn start or npm start
+  
+  cd ./server
+  nodemon server or node server.js
